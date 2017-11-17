@@ -2,7 +2,9 @@ a:link,
 a:visited,
 a:hover,
 a:active
-{ color: #ffffff; }
+{
+	color: #ffffff;
+}
 
 #header
 {
@@ -20,8 +22,9 @@ a:active
 #left
 {
     position: absolute;  
-    top: 160px;  
+    top: 128px;  
     left: 0;
+    bottom:0;
 	z-index:1;
 	color: #ffffff;
     background-color: #0f0f0f;
@@ -31,8 +34,9 @@ a:active
 #right
 {
     position: absolute;  
-    top: 160px;  
+    top:128px;  
     right: 0;
+    bottom:0;
 	z-index:1;
 	color: #ffffff;
     background-color: #0f0f0f;
@@ -58,4 +62,25 @@ a:active
 	right: 0;
 	margin: 0 auto;
 	z-index:-1;
+}
+
+#button1
+{
+    font-size: xx-large;
+    margin:16px;
+    padding:16px;
+}
+#button2
+{
+    font-size: xx-large;
+    margin:16px;
+    padding:16px;
+}
+#button3
+{
+    font-size: xx-large;
+    margin:16px;
+    padding:16px;
+    position:fixed;
+    bottom:0;
 }
