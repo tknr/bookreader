@@ -1,10 +1,12 @@
 $(document).ready(function () {
+	imageResize("#content");
 	imageResize("#image");
 	$("#header").hide("fade");
 	$("#footer").hide("fade");
 });
 
 $(window).resize(function () {
+	imageResize("#content");
 	imageResize("#image");
 });
 
@@ -14,13 +16,7 @@ $("#content").click(function(){
 });
 
 function imageResize(id){
-	var w = window.innerWidth ? window.innerWidth: $(window).width();
-	var h = window.innerHeight ? window.innerHeight: $(window).height();
-	console.log(w);
+	var h = $(window).innerHeight();
 	console.log(h);
-	if (w >= h) {
-        $(id).height(h);
-    } else {
-        $(id).width(w);
-    }
+	$(id).height(h);
 }
