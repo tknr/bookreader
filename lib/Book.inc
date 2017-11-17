@@ -66,6 +66,43 @@ class Book
 		return $this->max_page;
 	}
 
+	public function hasPrevPage($page){
+		return ( $page > $this->getMinPage() );
+	}
+
+	public function hasNextPage($page){
+		return ($page < $this->getMaxPage() );
+	}
+
+	public function getPrevPage($page){
+		if(!$this->hasPrevPage($page)){
+			return $this->getMinPage();
+		}
+		return $page -1;
+	}
+
+	public function getNextPage($page){
+		if(!$this->hasNextPage($page)){
+			return $this->getMaxPage();
+		}
+		return $page +1;
+	}
+
+	public function getPrevPageFF($page,$offset=10){
+		if($page - $offset < $this->getMinPage()){
+			return $this->getMinPage();
+		}
+		return $page - $offset;
+	}
+
+	public function getNextPageFF($page,$offset=10){
+		if($page + $offset > $this->getMaxPage()){
+			return $this->getMaxPage();
+		}
+		return $page +$offset;
+	}
+
+
 	public function getFilename($page){
 		if ($page < $this->min_page || $page > $this->max_page){
 			throw new \Exception("index error:[".$page."/".$this->max_page."]");

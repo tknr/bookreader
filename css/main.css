@@ -1,0 +1,28 @@
+#header
+{
+    position: absolute;  
+    top: 0;  
+    left: 0;
+z-index:1;
+color: #ffffff;
+    background-color: #0f0f0f;
+    opacity: 0.8;
+}
+
+#header a:link,
+#header a:visited,
+#header a:hover,
+#header a:active
+{ color: #ffffff; }
+
+#content
+{
+    position: fixed;  
+    top: 0;  
+    left: 0;
+z-index:0;
+}
+#image
+{
+z-index:-1;
+}

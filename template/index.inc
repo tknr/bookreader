@@ -5,38 +5,32 @@
 <title>%TITLE%</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<link rel="stylesheet" href="//code.jquery.com/mobile/latest/jquery.mobile.min.css" />
-<style>
-.ui-header .ui-title, /* header */
-.ui-footer .ui-title, /* footer */
-.ui-btn-inner, /* button */
-.ui-li-heading, /* listview heading */
-.ui-li .ui-btn-text a.ui-link-inherit, /* listview link */
-.ui-li-desc /* listview description */
-{
-    overflow: visible;
-    white-space: normal;
-}
-</style>
+<link rel="stylesheet" href="css/minireset.min.css" />
+<link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-	<div data-role="page" id="home">
 
-		<div data-role="header" data-position="fixed">
-		</div>
-
-		<div data-role="content">
-
-			<div class="content-primary main-content">
-				<img src="<?=$image_url?>" border="0" alt="<?=$alt?> />
-			</div>
-
-		</div>
-
+	<div id="header">
+		<a>%TITLE%</a>
+		<br />
+		<a href="<?=$nextpage_url?>"><i class="fa fa-angle-left" aria-hidden="true"></i>next</a>
+		<a href="<?=$nextpageff_url?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i>%PAGE_FF_OFFSET%</a>
+		<a href="<?=$lastpage_url?>"><i class="fa fa-caret-left" aria-hidden="true"></i>last</a>
+		<a><?=$page?> / <?=$maxpage?></a>
+		<a href="<?=$firstpage_url?>"><i class="fa fa-caret-right" aria-hidden="true"></i>first</a>
+		<a href="<?=$prevpageff_url?>"><i class="fa fa-angle-double-right" aria-hidden="true"></i>%PAGE_FF_OFFSET%</a>
+		<a href="<?=$prevpage_url?>"><i class="fa fa-angle-right" aria-hidden="true"></i>prev</a>
 	</div>
-	<script type="text/javascript" src="//code.jquery.com/jquery-2.1.2.min.js"></script>
-	<script type="text/javascript" src="//code.jquery.com/mobile/latest/jquery.mobile.min.js"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.animate-enhanced/1.07/jquery.animate-enhanced.min.js"></script>
+
+	<div id="content">
+		<img id="image" src="<?=$image_url?>" border="0" alt="<?=$alt?>" />
+	</div>
+
+	<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"
+			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			crossorigin="anonymous"></script>
+	<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="//use.fontawesome.com/2b63a6d468.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

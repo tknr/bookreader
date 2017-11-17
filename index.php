@@ -13,12 +13,13 @@ $define = array();
     $define['SELF_PHP'] = $self[0];
     $define['SCRIPT_PATH'] = rtrim($_SERVER["SCRIPT_NAME"], $define['SELF_PHP']);
     $define['CHARSET'] = 'UTF-8'; // Shift_JIS
-    $define['APC_TTL'] = 60 * 60 * 0.5;
 	$define['TEMPLATE_FOLDER'] = __DIR__ . '/template/';
 }
 // config
 {
+    $define['APC_TTL'] = 60 * 60 * 0.5;
 	$define['HOME_DIR'] = '/home/tknr/';
+	$define['PAGE_FF_OFFSET'] = 10;
 }
 APCUtil::define_array($define['SCRIPT_TITLE'], $define,false);
 // ///////request////////////////
@@ -34,13 +35,20 @@ $template->setValue('filename', $filename);
 $template->setValue('page', $page);
 $template->setValue('minpage', $book->getMinPage());
 $template->setValue('maxpage', $book->getMaxPage());
+$template->setValue('prevpage_url', '?p='.$book->getPrevPage($page).'&f='.$filename);
+$template->setValue('nextpage_url', '?p='.$book->getNextPage($page).'&f='.$filename);
+$template->setValue('prevpageff_url', '?p='.$book->getPrevPageFF($page,PAGE_FF_OFFSET).'&f='.$filename);
+$template->setValue('nextpageff_url', '?p='.$book->getNextPageFF($page,PAGE_FF_OFFSET).'&f='.$filename);
+$template->setValue('firstpage_url', '?p='.$book->getMinPage().'&f='.$filename);
+$template->setValue('lastpage_url', '?p='.$book->getMaxPage().'&f='.$filename);
+
 
 $template->setvalue('image_url','pic.php?p='.$page.'&f='.$filename);
 $template->setvalue('alt',$book->getFilename($page));
 
-
 $template->setReplace('%CHARSET%', CHARSET);
-$template->setReplace('%TITLE%', SCRIPT_TITLE.':'.$book->getArchiveFilename());
+$template->setReplace('%TITLE%', SCRIPT_TITLE.':'.$page.'/'.$book->getMaxPage().':'.$book->getArchiveFilename());
 $template->setReplace('%SELF%', SELF_PHP);
+$template->setReplace('%PAGE_FF_OFFSET%', PAGE_FF_OFFSET);
 return $template->render();
 ?>
