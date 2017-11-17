@@ -8,19 +8,21 @@ class Book
 	private $archive_filename = null;
 	private $disp_archive_filename = null;
 	private $files = array();
+	private $im_string_array = array();
 	private $zip = null;
 	private $rar = null;
 	private $min_page = 0;
 	private $max_page = 0;
 
 	function __construct($archive_filename) {
-		error_log($archive_filename);
-
 		$this->archive_filename = $archive_filename;
 		$this->init();
 	}
 
 	private function init(){
+		if (! file_exists($this->archive_filename)){
+			throw new \Exception("file not exist:[".$this->archive_filename."]");
+		}
 		{
 			$arr = explode(DIRECTORY_SEPARATOR, $this->archive_filename);
 			$this->disp_archive_filename = array_pop($arr);
@@ -28,7 +30,6 @@ class Book
 		
 		$this->archive_ext_array = array('zip','rar');
 		$this->picture_ext_array = array('jpg','png','gif');
-
 		{
 			$arr = explode('.', $this->archive_filename);
 			$ext = strtolower(array_pop($arr));
@@ -36,24 +37,28 @@ class Book
 				throw new \Exception("not archive:[".$this->archive_filename."]");
 			}
 		}
+
+
+
+
 		$this->zip = new \ZipArchive;
 		if (!$this->zip->open($this->archive_filename)) {
 			throw new \Exception("zip open error:[".$this->archive_filename."]");
 		}
 
-		{
-			$filearr = array();
-			for($i = 0; $i < $this->zip->numFiles;$i++){
-				$name = $this->zip->getNameIndex($i);
-				$arr = explode('.', $name);
-				$ext = strtolower(array_pop($arr));
-				if ( in_array($ext,$this->picture_ext_array) ){
-					$filearr[] = $name;
-				}
+		$filearr = array();
+		for($i = 0; $i < $this->zip->numFiles;$i++){
+			$filename = $this->zip->getNameIndex($i);
+			$arr = explode('.', $filename);
+			$ext = strtolower(array_pop($arr));
+			if ( in_array($ext,$this->picture_ext_array) ){
+				$filearr[] = $filename;
+				$im_string = $this->zip->getFromName($filename);
+				$this->im_string_array[$filename] = $im_string;
 			}
-			sort($filearr);
-			$this->files = $filearr;
 		}
+		sort($filearr);
+		$this->files = $filearr;
 		
 		$this->min_page = 0;
 		$this->max_page = count($this->files) -1;
@@ -125,13 +130,21 @@ class Book
 	}
 	public function getIMString($page){
 		$filename = $this->getFilename($page);
-		$im_string = $this->zip->getFromName($filename);
+		$im_string = $this->im_string_array[$filename];
 		return $im_string;
 	}
 
 	public function printPicture($page){
-		$filename = $this->getFilename($page);
-		$im_string = $this->getIMString($page);
+		$filename = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::filename');
+		if ($filename === false){
+			$filename = $this->getFilename($page);
+			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::filename',$filename);
+		}
+		$im_string = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::im_string');
+		if ($im_string === false){
+			$im_string = $this->getIMString($page);
+			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::im_string',$im_string);
+		}
 
 		$im = imagecreatefromstring($im_string);
 
