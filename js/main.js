@@ -1,18 +1,16 @@
 $(document).ready(function () {
 	imageResize("#image");
 	$("#header").hide("fade");
-	$("#left").hide("fade");
-	$("#right").hide("fade");
+	$("#footer").hide("fade");
 });
 
 $(window).resize(function () {
 	imageResize("#image");
 });
 
-$("#image").click(function(){
+$("#content").click(function(){
 	$("#header").toggle("fade");
-	$("#left").toggle("fade");
-	$("#right").toggle("fade");
+	$("#footer").toggle("fade");
 });
 
 function imageResize(id){

@@ -15,18 +15,23 @@
 		<a>%TITLE%</a>
 	</div>
 
-	<div id="left">
-		<div id="button1"><a href="<?=$lastpage_url?>"><i class="fa fa-caret-left" aria-hidden="true"></i>last</a></div>
-		<div id="button2"><a href="<?=$nextpageff_url?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i>%PAGE_FF_OFFSET%</a></div>
-		<div id="button3"><a href="<?=$nextpage_url?>"><i class="fa fa-angle-left" aria-hidden="true"></i>next</a></div>
-	</div>
+
 	<div id="content">
 		<img id="image" src="<?=$image_url?>" border="0" alt="<?=$alt?>" />
 	</div>
-	<div id="right">
-		<div id="button1"><a href="<?=$firstpage_url?>">first<i class="fa fa-caret-right" aria-hidden="true"></i></a></div>
-		<div id="button2"><a href="<?=$prevpageff_url?>">%PAGE_FF_OFFSET%<i class="fa fa-angle-double-right" aria-hidden="true"></i></a></div>
-		<div id="button3"><a href="<?=$prevpage_url?>">prev<i class="fa fa-angle-right" aria-hidden="true"></i></a></div>
+
+
+	<div id="footer">
+		<div id="left">
+			<a href="<?=$nextpage_url?>"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;next</a>&nbsp;
+			<a href="<?=$nextpageff_url?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;%PAGE_FF_OFFSET%</a>&nbsp;
+			<a href="<?=$lastpage_url?>"><i class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;last</a>
+		</div>
+		<div id="right">
+			<a href="<?=$firstpage_url?>">first&nbsp;<i class="fa fa-caret-right" aria-hidden="true"></i></a>&nbsp;
+			<a href="<?=$prevpageff_url?>">%PAGE_FF_OFFSET%&nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>&nbsp;
+			<a href="<?=$prevpage_url?>">prev&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+		</div>
 	</div>
 
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"
