@@ -17,12 +17,13 @@ color: #ffffff;
 
 #content
 {
-    position: fixed;  
-    top: 0;  
-    left: 0;
+width: 100%;
+    position: fixed;
+margin: 0 auto;
 z-index:0;
 }
 #image
 {
+margin: 0 auto;
 z-index:-1;
 }
