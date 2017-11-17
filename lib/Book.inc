@@ -135,12 +135,12 @@ class Book
 		$filename = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::filename');
 		if ($filename === false){
 			$filename = $this->getFilename($page);
-			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::filename',$filename);
+			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::filename',$filename,APC_TTL);
 		}
 		$im_string = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::im_string');
 		if ($im_string === false){
 			$im_string = $this->getIMString($page);
-			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::im_string',$im_string);
+			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::im_string',$im_string,APC_TTL);
 		}
 
 		$im = imagecreatefromstring($im_string);
