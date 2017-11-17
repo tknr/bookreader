@@ -68,4 +68,5 @@ a:active
 #font-xx-large
 {
     font-size: xx-large;
+    font-weight: bolder;
 }

@@ -38,9 +38,6 @@ class Book
 			}
 		}
 
-
-
-
 		$this->zip = new \ZipArchive;
 		if (!$this->zip->open($this->archive_filename)) {
 			throw new \Exception("zip open error:[".$this->archive_filename."]");
