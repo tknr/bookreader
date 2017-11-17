@@ -3,7 +3,7 @@
 <head>
 <meta charset="%CHARSET%">
 <title>%TITLE%</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="css/minireset.min.css" />
@@ -13,7 +13,7 @@
 
 	<div id="header">
 		<a><?=$page?> / <?=$maxpage?></a><br />
-		<a>%TITLE%</a>
+		<a><?=$disp_filename?></a>
 	</div>
 
 
@@ -24,22 +24,18 @@
 
 	<div id="footer">
 		<div id="left">
-			<a href="<?=$lastpage_url?>"><i class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;last</a>
-			<br />
-			<br />
-			<a href="<?=$nextpageff_url?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;%PAGE_FF_OFFSET%</a>
-			<br />
-			<br />
-			<a href="<?=$nextpage_url?>"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;next</a>
+			<a href="<?=$nextpage_url?>"><i id="font-xx-large" class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;next</a>
+			&nbsp;
+			<a href="<?=$nextpageff_url?>"><i id="font-xx-large" class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;%PAGE_FF_OFFSET%</a>
+			&nbsp;
+			<a href="<?=$lastpage_url?>"><i id="font-xx-large" class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;last</a>
 		</div>
 		<div id="right">
-			<a href="<?=$firstpage_url?>">first&nbsp;<i class="fa fa-caret-right" aria-hidden="true"></i></a>
-			<br />
-			<br />
-			<a href="<?=$prevpageff_url?>">%PAGE_FF_OFFSET%&nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-			<br />
-			<br />
-			<a href="<?=$prevpage_url?>">prev&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+			<a href="<?=$firstpage_url?>">first&nbsp;<i id="font-xx-large" class="fa fa-caret-right" aria-hidden="true"></i></a>
+			&nbsp;
+			<a href="<?=$prevpageff_url?>">%PAGE_FF_OFFSET%&nbsp;<i id="font-xx-large" class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+			&nbsp;
+			<a href="<?=$prevpage_url?>">prev&nbsp;<i id="font-xx-large" class="fa fa-angle-right" aria-hidden="true"></i></a>
 		</div>
 	</div>
 

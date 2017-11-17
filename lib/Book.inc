@@ -6,6 +6,7 @@ class Book
 	private $picture_ext_array = array();
 
 	private $archive_filename = null;
+	private $disp_archive_filename = null;
 	private $files = array();
 	private $zip = null;
 	private $rar = null;
@@ -20,38 +21,50 @@ class Book
 	}
 
 	private function init(){
+		{
+			$arr = explode(DIRECTORY_SEPARATOR, $this->archive_filename);
+			$this->disp_archive_filename = array_pop($arr);
+		}
+		
 		$this->archive_ext_array = array('zip','rar');
 		$this->picture_ext_array = array('jpg','png','gif');
 
-
-		$arr = explode('.', $this->archive_filename);
-		$ext = strtolower(array_pop($arr));
-		if ( !in_array($ext,$this->archive_ext_array) ){
-			throw new \Exception("not archive:[".$this->archive_filename."]");
+		{
+			$arr = explode('.', $this->archive_filename);
+			$ext = strtolower(array_pop($arr));
+			if ( !in_array($ext,$this->archive_ext_array) ){
+				throw new \Exception("not archive:[".$this->archive_filename."]");
+			}
 		}
 		$this->zip = new \ZipArchive;
 		if (!$this->zip->open($this->archive_filename)) {
 			throw new \Exception("zip open error:[".$this->archive_filename."]");
 		}
 
-		$filearr=array();
-		for($i = 0; $i < $this->zip->numFiles;$i++){
-			$name = $this->zip->getNameIndex($i);
-			$arr = explode('.', $name);
-			$ext = strtolower(array_pop($arr));
-			if ( in_array($ext,$this->picture_ext_array) ){
-				$filearr[] = $name;
+		{
+			$filearr = array();
+			for($i = 0; $i < $this->zip->numFiles;$i++){
+				$name = $this->zip->getNameIndex($i);
+				$arr = explode('.', $name);
+				$ext = strtolower(array_pop($arr));
+				if ( in_array($ext,$this->picture_ext_array) ){
+					$filearr[] = $name;
+				}
 			}
+			sort($filearr);
+			$this->files = $filearr;
 		}
-		sort($filearr);
-
-		$this->files = $filearr;
+		
 		$this->min_page = 0;
-		$this->max_page = count($filearr) -1;
+		$this->max_page = count($this->files) -1;
 	}
 
 	public function getArchiveFilename(){
 		return $this->archive_filename;
+	}
+	
+	public function getDispArchiveFilename(){
+		return $this->disp_archive_filename;
 	}
 
 	public function getFiles(){
@@ -101,7 +114,6 @@ class Book
 		}
 		return $page +$offset;
 	}
-
 
 	public function getFilename($page){
 		if ($page < $this->min_page || $page > $this->max_page){

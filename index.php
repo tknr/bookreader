@@ -32,6 +32,7 @@ $book = new Book($archive);
 // render
 $template = new EZTemplate(TEMPLATE_FOLDER . 'index.inc');
 $template->setValue('filename', $filename);
+$template->setValue('disp_filename', $book->getDispArchiveFilename());
 $template->setValue('page', $page);
 $template->setValue('minpage', $book->getMinPage());
 $template->setValue('maxpage', $book->getMaxPage());
@@ -47,7 +48,7 @@ $template->setvalue('image_url','pic.php?p='.$page.'&f='.$filename);
 $template->setvalue('alt',$book->getFilename($page));
 
 $template->setReplace('%CHARSET%', CHARSET);
-$template->setReplace('%TITLE%', SCRIPT_TITLE.':'.$filename);
+$template->setReplace('%TITLE%', SCRIPT_TITLE.':'.$book->getDispArchiveFilename());
 $template->setReplace('%SELF%', SELF_PHP);
 $template->setReplace('%PAGE_FF_OFFSET%', PAGE_FF_OFFSET);
 return $template->render();

@@ -1,13 +1,6 @@
-$(document).ready(function () {
-	imageResize("#content");
-	imageResize("#image");
+$(document).ready(function() {
 	$("#header").hide("fade");
 	$("#footer").hide("fade");
-});
-
-$(window).resize(function () {
-	imageResize("#content");
-	imageResize("#image");
 });
 
 $("#content").click(function(){
@@ -15,11 +8,47 @@ $("#content").click(function(){
 	$("#footer").toggle("fade");
 });
 
-function imageResize(id){
-	var h = $(window).height()
-	if (ua.indexOf('iPhone') > 0 || ua.indexOf('iPod') > 0 || ua.indexOf('Android') > 0 && ua.indexOf('Mobile') > 0) {
-		h = ((h * 70) / 100);
-	}
+$(window).on('load',function() {
+	imageResize("#image");
+});
+
+$(window).resize(function () {
+	imageResize("#image");
+});
+
+$(window).on("orientationchange",function(){
+	imageResize("#image");
+});
+
+function imageResize(selector){
+//	var h = getWindowHeight();
+	scrollTo(0, 0);
+	var h = window.innerHeight;
+//	h = h - 100;
 	console.log(h);
-	$(id).height(h);
+	$(selector).height(h);
+}
+
+function getWindowHeight(){
+	// 端末の向きを算出
+    var isPortrait = window.innerHeight > window.innerWidth;
+    // UserAgent から端末の種類を判別
+    var ua = navigator.userAgent;
+    var device;
+    if (ua.search(/iPhone/) != -1 || ua.search(/iPod/) != -1) {
+        device = "iPhone";
+    } else if (ua.search(/Android/) != -1) {
+        device = "Android";
+    }
+    var h;
+    // 端末の種類からページの高さを算出
+    if (device == "Android") {
+        h = Math.round(window.outerHeight / window.devicePixelRatio);
+    } else if (device == "iPhone") {
+        bar = (isPortrait ? 480 : screen.width) - window.innerHeight - (20 + (isPortrait ? 44 : 32));
+        h = window.innerHeight + bar;
+    } else {
+        h = window.innerHeight;
+    }
+    return h;
 }
