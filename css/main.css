@@ -1,29 +1,60 @@
+a:link,
+a:visited,
+a:hover,
+a:active
+{ color: #ffffff; }
+
 #header
 {
     position: absolute;  
     top: 0;  
-    left: 0;
-z-index:1;
-color: #ffffff;
+	left: 0;
+	right: 0;
+	z-index:1;
+	color: #ffffff;
     background-color: #0f0f0f;
     opacity: 0.8;
 }
 
-#header a:link,
-#header a:visited,
-#header a:hover,
-#header a:active
-{ color: #ffffff; }
+#left
+{
+    position: absolute;  
+    top: 160px;  
+    left: 0;
+	z-index:1;
+	color: #ffffff;
+    background-color: #0f0f0f;
+    opacity: 0.8;
+}
+
+#right
+{
+    position: absolute;  
+    top: 160px;  
+    right: 0;
+	z-index:1;
+	color: #ffffff;
+    background-color: #0f0f0f;
+    opacity: 0.8;
+}
 
 #content
 {
-width: 100%;
+	width: 100%;
     position: fixed;
-margin: 0 auto;
-z-index:0;
+    top: 0;  
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	z-index:0;
 }
+
 #image
 {
-margin: 0 auto;
-z-index:-1;
+	position: fixed;
+    top: 0;  
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	z-index:-1;
 }

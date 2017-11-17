@@ -13,7 +13,7 @@
 	<div id="header">
 		<a>%TITLE%</a>
 		<br />
-		<a href="<?=$nextpage_url?>"><i class="fa fa-angle-left" aria-hidden="true"></i>next</a>
+		
 		<a href="<?=$nextpageff_url?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i>%PAGE_FF_OFFSET%</a>
 		<a href="<?=$lastpage_url?>"><i class="fa fa-caret-left" aria-hidden="true"></i>last</a>
 		<a><?=$page?> / <?=$maxpage?></a>
@@ -22,9 +22,15 @@
 		<a href="<?=$prevpage_url?>"><i class="fa fa-angle-right" aria-hidden="true"></i>prev</a>
 	</div>
 
+	<div id="left">
+		<a href="<?=$nextpage_url?>"><i class="fa fa-angle-left" aria-hidden="true"></i>next</a>
+	</div>
 	<div id="content">
 		<img id="image" src="<?=$image_url?>" border="0" alt="<?=$alt?>" />
 	</div>
+	<div id="right">
+		<a href="<?=$prevpage_url?>"><i class="fa fa-angle-right" aria-hidden="true"></i>prev</a>
+	</div>	
 
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js"
 			integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
