@@ -13,6 +13,8 @@ class Book
 	private $max_page = 0;
 
 	function __construct($archive_filename) {
+		error_log($archive_filename);
+
 		$this->archive_filename = $archive_filename;
 		$this->init();
 	}
@@ -46,6 +48,10 @@ class Book
 		$this->files = $filearr;
 		$this->min_page = 0;
 		$this->max_page = count($filearr) -1;
+	}
+
+	public function getArchiveFilename(){
+		return $this->archive_filename;
 	}
 
 	public function getFiles(){
