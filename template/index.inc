@@ -38,7 +38,6 @@
 			crossorigin="anonymous"></script>
 	<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="//use.fontawesome.com/2b63a6d468.js"></script>
-	<script type="text/javascript" src="js/fixAspect.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
