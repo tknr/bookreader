@@ -1,5 +1,6 @@
 <?php
 // ///////init//////////
+ini_set('memory_limit', '-1');
 setlocale(LC_ALL,'ja_JP.UTF-8');
 date_default_timezone_set('Asia/Tokyo');
 require_once __DIR__ . '/lib/ReflexiveLoader.inc';

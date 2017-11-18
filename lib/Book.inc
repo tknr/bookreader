@@ -20,6 +20,9 @@ class Book
 	}
 
 	private function init(){
+		$this->archive_ext_array = array('zip','rar');
+		$this->picture_ext_array = array('jpg','png','gif');
+
 		if (! file_exists($this->archive_filename)){
 			throw new \Exception("file not exist:[".$this->archive_filename."]");
 		}
@@ -27,9 +30,7 @@ class Book
 			$arr = explode(DIRECTORY_SEPARATOR, $this->archive_filename);
 			$this->disp_archive_filename = array_pop($arr);
 		}
-		
-		$this->archive_ext_array = array('zip','rar');
-		$this->picture_ext_array = array('jpg','png','gif');
+
 		{
 			$arr = explode('.', $this->archive_filename);
 			$ext = strtolower(array_pop($arr));
@@ -43,19 +44,29 @@ class Book
 			throw new \Exception("zip open error:[".$this->archive_filename."]");
 		}
 
-		$filearr = array();
-		for($i = 0; $i < $this->zip->numFiles;$i++){
-			$filename = $this->zip->getNameIndex($i);
-			$arr = explode('.', $filename);
-			$ext = strtolower(array_pop($arr));
-			if ( in_array($ext,$this->picture_ext_array) ){
-				$filearr[] = $filename;
-				$im_string = $this->zip->getFromName($filename);
-				$this->im_string_array[$filename] = $im_string;
+		$apc_files = APCUtil::get('Zip::'.$this->archive_filename.'::files');
+		$apc_im_string_array = APCUtil::get('Zip::'.$this->archive_filename.'::im_string_array');
+
+		if ($apc_files === false || $apc_im_string_array === false){
+			$filearr = array();
+			for($i = 0; $i < $this->zip->numFiles;$i++){
+				$filename = $this->zip->getNameIndex($i);
+				$arr = explode('.', $filename);
+				$ext = strtolower(array_pop($arr));
+				if ( in_array($ext,$this->picture_ext_array) ){
+					$filearr[] = $filename;
+					$im_string = $this->zip->getFromName($filename);
+					$this->im_string_array[$filename] = $im_string;
+				}
 			}
+			sort($filearr);
+			$this->files = $filearr;
+			APCUtil::put('Zip::'.$this->archive_filename.'::files',serialize($this->files),APC_TTL);
+			APCUtil::put('Zip::'.$this->archive_filename.'::im_string_array',serialize($this->im_string_array),APC_TTL);
+		}else{
+			$this->files = unserialize($apc_files);
+			$this->im_string_array = unserialize($apc_im_string_arrays);
 		}
-		sort($filearr);
-		$this->files = $filearr;
 		
 		$this->min_page = 0;
 		$this->max_page = count($this->files) -1;
