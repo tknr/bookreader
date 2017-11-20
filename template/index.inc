@@ -13,7 +13,7 @@
 <body>
 	<div data-role="page" id="home">
 		<div id="header" data-position="fixed">
-			<a data-role="button" data-mini="true"><?=$disp_filename?></a>
+			<a data-role="button"><?=$disp_filename?></a>
 		</div>
 
 
@@ -24,19 +24,15 @@
 
 		<div id="footer" data-position="fixed">
 			<div data-role="controlgroup" data-type="horizontal">
-				<a data-role="button" data-mini="true"><i id="font-xx-large" class="fa fa-book" aria-hidden="true"></i>&nbsp;<?=$page?> / <?=$maxpage?></a>
+				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$nextpage_url?>"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;next</a>
+				<a data-role="button" data-inline="true"><i class="fa fa-book" aria-hidden="true"></i>&nbsp;<?=$page?> / <?=$maxpage?></a>
+				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$prevpage_url?>">prev&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
 			</div>
 			<div data-role="controlgroup" data-type="horizontal">
-				<span id="left">
-				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$nextpage_url?>"><i id="font-xx-large" class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;next</a>
-				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$nextpageff_url?>"><i id="font-xx-large" class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;%PAGE_FF_OFFSET%</a>
-				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$lastpage_url?>"><i id="font-xx-large" class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;last</a>
-				</span>
-				<span id="right">
-				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$firstpage_url?>">first&nbsp;<i id="font-xx-large" class="fa fa-caret-right" aria-hidden="true"></i></a>
-				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$prevpageff_url?>">%PAGE_FF_OFFSET%&nbsp;<i id="font-xx-large" class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$prevpage_url?>">prev&nbsp;<i id="font-xx-large" class="fa fa-angle-right" aria-hidden="true"></i></a>
-				</span>
+				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$nextpageff_url?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;%PAGE_FF_OFFSET%</a>
+				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$lastpage_url?>"><i class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;last</a>
+				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$firstpage_url?>">first&nbsp;<i class="fa fa-caret-right" aria-hidden="true"></i></a>
+				<a data-role="button" data-inline="true" data-ajax="false" href="<?=$prevpageff_url?>">%PAGE_FF_OFFSET%&nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 			</div>
 		</div>
 		
