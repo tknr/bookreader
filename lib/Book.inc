@@ -133,28 +133,32 @@ class Book
 			throw new \Exception("index error:[".$page."/".$this->max_page."]");
 		}
 
-		$filename = $this->files[$page];
+		$filename = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::filename');
+		if ($filename === false){
+			$filename = $this->files[$page];
+			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::filename',$filename,APC_TTL);
+		}
 		return $filename;
 	}
 	public function getIMString($page){
 		$filename = $this->getFilename($page);
-		$im_string = $this->im_string_array[$filename];
+		$im_string = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::im_string');
+		if ($im_string === false){
+			$im_string = $this->im_string_array[$filename];
+			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::im_string',$im_string,APC_TTL);
+		}
 		return $im_string;
+	}
+	
+	public function getImageObject($page){
+		$im_string = $this->getIMString($page);
+		$im = imagecreatefromstring($im_string);
+		return $im;
 	}
 
 	public function printPicture($page){
-		$filename = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::filename');
-		if ($filename === false){
-			$filename = $this->getFilename($page);
-			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::filename',$filename,APC_TTL);
-		}
-		$im_string = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::im_string');
-		if ($im_string === false){
-			$im_string = $this->getIMString($page);
-			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::im_string',$im_string,APC_TTL);
-		}
-
-		$im = imagecreatefromstring($im_string);
+		$filename = $this->getFilename($page);
+		$im = $this->getImageObject($page);
 
 		$arr = explode('.', $filename);
 		$ext = strtolower(array_pop($arr));

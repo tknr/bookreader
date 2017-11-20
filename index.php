@@ -29,6 +29,7 @@ $archive = HOME_DIR.$filename;
 $page = HttpUtil::getInt("p", 0);
 ////////// book
 $book = new Book($archive);
+$im = $book->getImageObject($page);
 
 // render
 $template = new EZTemplate(TEMPLATE_FOLDER . 'index.inc');
@@ -46,6 +47,9 @@ $template->setValue('lastpage_url', '?p='.$book->getMaxPage().'&f='.$filename);
 
 
 $template->setvalue('image_url','pic.php?p='.$page.'&f='.$filename);
+$template->setvalue('image_width',imagesx($im));
+$template->setvalue('image_height',imagesy($im));
+
 $template->setvalue('alt',$book->getFilename($page));
 
 $template->setReplace('%CHARSET%', CHARSET);

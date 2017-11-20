@@ -4,7 +4,8 @@ $(document).on("mobileinit", function(){
 	
 	$("#header").hide("fade");
 	$("#footer").hide("fade");
-	
+		
+	scrollTo(0, 0);
 	imageResize("#image");
 });
 
@@ -14,25 +15,29 @@ $("#content").click(function(){
 });
 
 $(window).resize(function () {
-	imageResize("#image img");
+	console.log("resize");
+	scrollTo(0, 0);
+	imageResize("#image");
 });
 
 $(window).on("orientationchange",function(){
-	imageResize("#image img");
+	console.log("orientationchange");
+	scrollTo(0, 0);
+	imageResize("#image");
 });
 
 function imageResize(selector){
-	scrollTo(0, 0);
+	console.log("imageResize");
+	console.log(selector);
+
 	var w = window.innerWidth;
 	var h = window.innerHeight;
 
 	console.log(w);
 	console.log(h);
 	
-    var img = new Image();
-    img.src = $(selector).attr('src');
-    var image_width = img.width;
-    var image_height = img.height;
+    var image_width = $(selector).width();
+    var image_height = $(selector).height();
 
 	console.log(image_width);
 	console.log(image_height);

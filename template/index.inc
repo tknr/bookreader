@@ -18,7 +18,7 @@
 
 
 		<div id="content">
-			<img id="image" src="<?=$image_url?>" border="0" alt="<?=$alt?>" />
+			<img id="image" width="<?=$image_width?>" height="<?=$image_height?>" border="0" src="<?=$image_url?>" alt="<?=$alt?>" />
 		</div>
 
 
