@@ -7,6 +7,9 @@ $(document).on("mobileinit", function(){
 		
 	scrollTo(0, 0);
 	imageResize("#image");
+	
+    $("#image").on("swipeleft", swipeleftHandler);
+    $("#image").on("swiperight", swiperightHandler);
 });
 
 $("#content").click(function(){
@@ -55,4 +58,18 @@ function imageResize(selector){
 	
 	$(selector).width(width);
     $(selector).height(height);
+}
+
+function swipeleftHandler( event ){
+	console.log('swipeleftHandler');
+	var href = $("#nextpage").attr("href");
+	console.log(href);
+	location.href=href;
+}
+
+function swiperightHandler( event ){
+	console.log('swiperightHandler');
+	var href = $("#prevpage").attr("href");
+	console.log(href);
+	location.href=href;
 }
