@@ -1,4 +1,7 @@
-$(document).ready(function() {
+$(document).on("mobileinit", function(){
+	console.log("mobileinit");
+	$.mobile.ajaxFormsEnabled = false;
+	
 	$("#header").hide("fade");
 	$("#footer").hide("fade");
 });
@@ -13,20 +16,42 @@ $(window).on('load',function() {
 });
 
 $(window).resize(function () {
-	imageResize("#image");
+	imageResize("#image img");
 });
 
 $(window).on("orientationchange",function(){
-	imageResize("#image");
+	imageResize("#image img");
 });
 
 function imageResize(selector){
-//	var h = getWindowHeight();
 	scrollTo(0, 0);
+	var w = window.innerWidth;
 	var h = window.innerHeight;
-//	h = h - 100;
+
+	console.log(w);
 	console.log(h);
-	$(selector).height(h);
+	
+    var img = new Image();
+    img.src = $(selector).attr('src');
+    var image_width = img.width;
+    var image_height = img.height;
+
+	console.log(image_width);
+	console.log(image_height);
+	
+	var width = w;
+	var height = image_height * (w / image_width);
+	
+	if( height > h ){
+		height = h;
+		width = image_width * (h / image_height);
+	}
+	
+	console.log(width);
+	console.log(height);
+	
+	$(selector).width(width);
+    $(selector).height(height);
 }
 
 function getWindowHeight(){
@@ -40,6 +65,7 @@ function getWindowHeight(){
     } else if (ua.search(/Android/) != -1) {
         device = "Android";
     }
+    
     var h;
     // 端末の種類からページの高さを算出
     if (device == "Android") {
