@@ -62,14 +62,14 @@ function imageResize(selector){
 
 function swipeleftHandler( event ){
 	console.log('swipeleftHandler');
-	var href = $("#nextpage").attr("href");
+	var href = $("#prevpage").attr("href");
 	console.log(href);
 	location.href=href;
 }
 
 function swiperightHandler( event ){
 	console.log('swiperightHandler');
-	var href = $("#prevpage").attr("href");
+	var href = $("#nextpage").attr("href");
 	console.log(href);
 	location.href=href;
 }
