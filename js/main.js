@@ -5,11 +5,10 @@ $(document).on("mobileinit", function(){
 	$("#header").hide("fade");
 	$("#footer").hide("fade");
 		
-	scrollTo(0, 0);
-	imageResize("#image");
-	
     $("#image").on("swipeleft", swipeleftHandler);
     $("#image").on("swiperight", swiperightHandler);
+
+	imageResize("#image");
 });
 
 $("#content").click(function(){
@@ -19,13 +18,11 @@ $("#content").click(function(){
 
 $(window).resize(function () {
 	console.log("resize");
-	scrollTo(0, 0);
 	imageResize("#image");
 });
 
 $(window).on("orientationchange",function(){
 	console.log("orientationchange");
-	scrollTo(0, 0);
 	imageResize("#image");
 });
 
@@ -33,8 +30,10 @@ function imageResize(selector){
 	console.log("imageResize");
 	console.log(selector);
 
-	var w = window.innerWidth;
-	var h = window.innerHeight;
+	scrollTo(0, 0);
+
+	var w = $(window).width();
+	var h = $(window).height();
 
 	console.log(w);
 	console.log(h);
