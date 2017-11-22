@@ -7,68 +7,62 @@ html {
 a:link,
 a:visited,
 a:hover,
-a:active
-{
+a:active {
 	color: #ffffff;
 }
 
-#header
-{
-    position: absolute;  
-    top: 0;  
+#header {
+	position: absolute;
+	top: 0;
 	left: 0;
 	right: 0;
-	z-index:1;
+	z-index: 1;
 	color: #ffffff;
-    background-color: #0f0f0f;
-    opacity: 0.8;
-    text-align:center;
+	background-color: #0f0f0f;
+	opacity: 0.8;
+	text-align: center;
 }
-#footer
-{
-    position: absolute;  
-    bottom: 0;  
+
+#footer {
+	position: absolute;
+	bottom: 0;
 	left: 0;
 	right: 0;
-	z-index:1;
+	z-index: 1;
 	color: #ffffff;
-    background-color: #0f0f0f;
-    opacity: 0.8;
-    text-align:center;
+	background-color: #0f0f0f;
+	opacity: 0.8;
+	text-align: center;
 }
 
-#left
-{
-    float: left;
+#left {
+	float: left;
 }
 
-#right
-{
-    float: right;
+#right {
+	float: right;
 }
 
-#content
-{
+#content {
 	width: 100%;
 	position: fixed;
-    top: 0;  
+	top: 0;
 	left: 0;
 	right: 0;
 	margin: 0 auto;
-	z-index:0;
+	z-index: 0;
 }
 
-#image
-{
+#image {
 	position: fixed;
-    top: 0;  
+	top: 0;
 	left: 0;
 	right: 0;
 	margin: 0 auto;
-	z-index:-1;
+	z-index: -1;
 }
-#font-xx-large
-{
-    font-size: xx-large;
-    font-weight: bolder;
+
+#font-xx-large {
+	font-size: xx-large;
+	font-weight: bolder;
 }

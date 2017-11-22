@@ -3,7 +3,7 @@
 <head>
 <meta charset="%CHARSET%">
 <title>%TITLE%</title>
-<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="css/minireset.min.css" />
@@ -24,15 +24,15 @@
 
 		<div id="footer" data-position="fixed">
 			<div data-role="controlgroup" data-type="horizontal">
-				<a data-role="button" data-inline="true" data-ajax="false" id="nextpage" href="<?=$nextpage_url?>"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;next</a>
+				<a data-role="button" data-inline="true" id="nextpage"<?php /* data-ajax="false" href="<?=$nextpage_url?>"*/?>><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;next</a>
 				<a data-role="button" data-inline="true" id="page_number"><?=$page?> / <?=$maxpage?></a>
-				<a data-role="button" data-inline="true" data-ajax="false" id="prevpage" href="<?=$prevpage_url?>">prev&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+				<a data-role="button" data-inline="true" id="prevpage"<?php /* data-ajax="false" href="<?=$prevpage_url?>"*/?>>prev&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
 			</div>
 			<div data-role="controlgroup" data-type="horizontal">
-				<a data-role="button" data-inline="true" data-ajax="false" id="nextpageff" href="<?=$nextpageff_url?>"><i class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;%PAGE_FF_OFFSET%</a>
-				<a data-role="button" data-inline="true" data-ajax="false" id="lastpage" href="<?=$lastpage_url?>"><i class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;last</a>
-				<a data-role="button" data-inline="true" data-ajax="false" id="firstpage" href="<?=$firstpage_url?>">first&nbsp;<i class="fa fa-caret-right" aria-hidden="true"></i></a>
-				<a data-role="button" data-inline="true" data-ajax="false" id="prevpageff" href="<?=$prevpageff_url?>">%PAGE_FF_OFFSET%&nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+				<a data-role="button" data-inline="true" id="nextpageff"<?php /* data-ajax="false" href="<?=$nextpageff_url?>"*/?>><i class="fa fa-angle-double-left" aria-hidden="true"></i>&nbsp;%PAGE_FF_OFFSET%</a>
+				<a data-role="button" data-inline="true" id="lastpage"<?php /* data-ajax="false" href="<?=$lastpage_url?>"*/?>><i class="fa fa-caret-left" aria-hidden="true"></i>&nbsp;last</a>
+				<a data-role="button" data-inline="true" id="firstpage"<?php /* data-ajax="false" href="<?=$firstpage_url?>"*/?>>first&nbsp;<i class="fa fa-caret-right" aria-hidden="true"></i></a>
+				<a data-role="button" data-inline="true" id="prevpageff"<?php /* data-ajax="false" href="<?=$prevpageff_url?>"*/?>>%PAGE_FF_OFFSET%&nbsp;<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 			</div>
 		</div>
 		
@@ -40,9 +40,9 @@
 
 	<script type="text/javascript" src="js/console.ie.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<?php /*	<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>*/?>
 	<script type="text/javascript" src="//use.fontawesome.com/2b63a6d468.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
