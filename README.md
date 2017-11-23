@@ -33,6 +33,8 @@ swipe right : next page
 
 tap on image : shows info on header , and control buttons on footer
 
+bookmark : go to url that page callled for bookmark
+
 swipe up on footer : show more controll buttons
 
 

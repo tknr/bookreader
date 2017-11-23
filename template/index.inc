@@ -25,6 +25,7 @@
 		<div id="footer" data-position="fixed">
 			<div data-role="controlgroup" data-type="horizontal">
 				<a data-role="button" data-inline="true" id="nextpage"><i class="fa fa-angle-left" aria-hidden="true"></i>&nbsp;next</a>
+				<a data-role="button" data-inline="true" id="bookmark" data-ajax="false" href="%SELF%?f=<?=$filename?>&p=<?=$page?>"><i class="fa fa-bookmark" aria-hidden="true"></i>&nbsp;bookmark</a>
 				<a data-role="button" data-inline="true" id="page_number"><?=$page?> / <?=$maxpage?></a>
 				<a data-role="button" data-inline="true" id="prevpage">prev&nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
 			</div>

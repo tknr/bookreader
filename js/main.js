@@ -1,6 +1,5 @@
 var page_offset = 10;
 
-
 $(document).on("mobileinit", function() {
 	console.log("mobileinit");
 	$.mobile.ajaxFormsEnabled = false;
@@ -133,8 +132,11 @@ function getMaxPageNumber(selector) {
 	return parseInt(page_number);
 }
 
-function changeImage(image_selector, page_number_selector, dst_page) {
+function changeImage(image_selector, page_number_selector, bookmark_selector, dst_page) {
 	console.log('changeImage');
+	console.log(image_selector);
+	console.log(page_number_selector);
+	console.log(bookmark_selector);
 	console.log(dst_page);
 
 	var orig_src = $(image_selector).attr('src');
@@ -174,98 +176,111 @@ function changeImage(image_selector, page_number_selector, dst_page) {
 
 	console.dir(url_obj);
 
-	var dst_src = orig_src_array[0];
-	dst_src += '?';
-	dst_src += 'p=' + url_obj.p;
-	dst_src += '&f=' + url_obj.f;
+	var dst_url_param = '?';
+	dst_url_param += 'p=' + url_obj.p;
+	dst_url_param += '&f=' + url_obj.f;
+
+	var dst_src = orig_src_array[0] + dst_url_param;
 
 	console.log(dst_src);
 
+	var orig_url = $(bookmark_selector).attr('href');
+	console.log(orig_url);
+
+	var orig_url_array = orig_url.split('?');
+
+	console.dir(orig_url_array);
+
+	var dst_url = orig_url_array[0] + dst_url_param;
+
+	console.log(dst_url);
+
+
 	$(image_selector).attr('src', dst_src);
 	$(page_number_selector).text(dst_page + ' / ' + max_page);
+	$(bookmark_selector).attr('href', dst_url);
 }
 
-function goPrevPage(image_selector, page_selector) {
+function goPrevPage(image_selector, page_selector, bookmark_selector) {
 	console.log('goPrevPage');
 	var currentPage = getCurrentPageNumber(page_selector);
-	changeImage(image_selector, page_selector, currentPage - 1);
+	changeImage(image_selector, page_selector, bookmark_selector, currentPage - 1);
 }
 
-function goNextPage(image_selector, page_selector) {
+function goNextPage(image_selector, page_selector, bookmark_selector) {
 	console.log('goNextPage');
 	var currentPage = getCurrentPageNumber(page_selector);
-	changeImage(image_selector, page_selector, currentPage + 1);
+	changeImage(image_selector, page_selector, bookmark_selector, currentPage + 1);
 }
 
-function goPrevPageFF(image_selector, page_selector, offset) {
+function goPrevPageFF(image_selector, page_selector, bookmark_selector, offset) {
 	console.log('goPrevPageFF');
 	var currentPage = getCurrentPageNumber(page_selector);
-	changeImage(image_selector, page_selector, currentPage - offset);
+	changeImage(image_selector, page_selector, bookmark_selector, currentPage - offset);
 }
 
-function goNextPageFF(image_selector, page_selector, offset) {
+function goNextPageFF(image_selector, page_selector, bookmark_selector, offset) {
 	console.log('goNextPageFF');
 	var currentPage = getCurrentPageNumber(page_selector);
-	changeImage(image_selector, page_selector, currentPage + offset);
+	changeImage(image_selector, page_selector, bookmark_selector, currentPage + offset);
 }
 
-function goFirstPage(image_selector, page_selector) {
+function goFirstPage(image_selector, page_selector, bookmark_selector) {
 	console.log('goFirstPage');
-	changeImage(image_selector, page_selector, 0);
+	changeImage(image_selector, page_selector, bookmark_selector, 0);
 }
 
-function goLastPage(image_selector, page_selector) {
+function goLastPage(image_selector, page_selector, bookmark_selector) {
 	console.log('goLastPage');
 	var maxPage = getMaxPageNumber(page_selector);
-	changeImage(image_selector, page_selector, maxPage);
+	changeImage(image_selector, page_selector, bookmark_selector, maxPage);
 }
 
 
 function swipeleftHandler(event) {
 	console.log('swipeleftHandler');
 	event.preventDefault();
-	goPrevPage('#image', '#page_number');
+	goPrevPage('#image', '#page_number', "#bookmark");
 }
 
 function swiperightHandler(event) {
 	console.log('swiperightHandler');
 	event.preventDefault();
-	goNextPage('#image', '#page_number');
+	goNextPage('#image', '#page_number', "#bookmark");
 }
 
 function prevpageHandler(event) {
 	console.log('prevpageHandler');
 	event.preventDefault();
-	goPrevPage('#image', '#page_number');
+	goPrevPage('#image', '#page_number', "#bookmark");
 }
 
 function nextpageHandler(event) {
 	console.log('nextpageHandler');
 	event.preventDefault();
-	goNextPage('#image', '#page_number');
+	goNextPage('#image', '#page_number', "#bookmark");
 }
 
 function prevpageffHandler(event) {
 	console.log('prevpageffHandler');
 	event.preventDefault();
-	goPrevPageFF('#image', '#page_number', page_offset);
+	goPrevPageFF('#image', '#page_number', "#bookmark", page_offset);
 }
 
 function nextpageffHandler(event) {
 	console.log('nextpageffHandler');
 	event.preventDefault();
-	goNextPageFF('#image', '#page_number', page_offset);
+	goNextPageFF('#image', '#page_number', "#bookmark", page_offset);
 }
 
 function firstpageHandler(event) {
 	console.log('firstpageHandler');
 	event.preventDefault();
-	goFirstPage('#image', '#page_number');
+	goFirstPage('#image', '#page_number', "#bookmark");
 }
 
 function lastpageHandler(event) {
 	console.log('lastpageHandler');
 	event.preventDefault();
-
-	goLastPage('#image', '#page_number');
+	goLastPage('#image', '#page_number', "#bookmark");
 }
