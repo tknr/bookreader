@@ -1,16 +1,34 @@
+var page_offset = 10;
+
+
 $(document).on("mobileinit", function() {
 	console.log("mobileinit");
 	$.mobile.ajaxFormsEnabled = false;
 
 });
 
-$(document).on('pageshow', '#home', function() {
-	//ページが表示されるたびに実行する
-	console.log("pageshow");
+$(document).on("pagecreate", function() {
+	console.log("pagecreate");
+
+	imageResize("#image");
+
 	init();
 });
 
-$(window).on('load', function() {
+$img = $('#image img');
+$img.originSrc = $img.src;
+$img.src = ""; // これで一旦クリアできます！
+
+// コールバックを設定
+$img.bind('load', function() {
+	console.log("img load");
+
+});
+
+// 画像読み込み開始
+$img.src = $img.originSrc;
+
+$(window).load(function() {
 	console.log("load");
 });
 
@@ -27,21 +45,29 @@ $(window).on("orientationchange", function() {
 function init() {
 	console.log("init");
 
-	imageResize("#image");
+	$("#header").hide("fade");
+	$("#footer").hide("fade");
 
-	$("#header").hide();
-	$("#footer").hide();
+	$("#image").on("click", togglemenuHandler);
+	$("#image").on("swipeleft", swipeleftHandler);
+	$("#image").on("swiperight", swiperightHandler);
+
+	$('#prevpage').on("click", prevpageHandler);
+	$('#nextpage').on("click", nextpageHandler);
+	$('#prevpageff').on("click", prevpageffHandler);
+	$('#nextpageff').on("click", nextpageffHandler);
+	$('#firstpage').on("click", firstpageHandler);
+	$('#lastpage').on("click", lastpageHandler);
 }
 
-$("#image").on("click", togglemenuHandler);
-$("#image").on("swipeleft", swipeleftHandler);
-$("#image").on("swiperight", swiperightHandler);
-$('#prevpage').on("click", prevpageHandler);
-$('#nextpage').on("click", nextpageHandler);
-$('#prevpageff').on("click", prevpageffHandler);
-$('#nextpageff').on("click", nextpageffHandler);
-$('#firstpage').on("click", firstpageHandler);
-$('#lastpage').on("click", lastpageHandler);
+
+function togglemenuHandler(event) {
+	console.log('toggleMenuHandler');
+	event.preventDefault();
+
+	$("#header").toggle("fade");
+	$("#footer").toggle("fade");
+}
 
 function imageResize(selector) {
 	console.log("imageResize");
@@ -114,7 +140,6 @@ function changeImage(image_selector, page_number_selector, dst_page) {
 	var orig_src = $(image_selector).attr('src');
 	console.log(orig_src);
 
-	var url_obj = {};
 	var orig_src_array = orig_src.split('?');
 
 	console.dir(orig_src_array);
@@ -124,14 +149,13 @@ function changeImage(image_selector, page_number_selector, dst_page) {
 
 	console.dir(orig_param_array);
 
-	for (var key_val of orig_param_array) {
+	var url_obj = {};
+	for (var i = 0; i < orig_param_array.length; i++) {
+		var key_val = orig_param_array[i];
 		var key_val_array = key_val.split('=');
-
 		console.dir(key_val_array);
-
 		url_obj[key_val_array[0]] = key_val_array[1];
 	}
-
 	console.dir(url_obj);
 
 	if (dst_page < 0) {
@@ -146,14 +170,14 @@ function changeImage(image_selector, page_number_selector, dst_page) {
 	}
 	console.log(dst_page);
 
-	url_obj['p'] = dst_page;
+	url_obj.p = dst_page;
 
 	console.dir(url_obj);
 
 	var dst_src = orig_src_array[0];
 	dst_src += '?';
-	dst_src += 'p=' + url_obj['p'];
-	dst_src += '&f=' + url_obj['f'];
+	dst_src += 'p=' + url_obj.p;
+	dst_src += '&f=' + url_obj.f;
 
 	console.log(dst_src);
 
@@ -173,13 +197,13 @@ function goNextPage(image_selector, page_selector) {
 	changeImage(image_selector, page_selector, currentPage + 1);
 }
 
-function goPrevPageFF(image_selector, page_selector, offset = 10) {
+function goPrevPageFF(image_selector, page_selector, offset) {
 	console.log('goPrevPageFF');
 	var currentPage = getCurrentPageNumber(page_selector);
 	changeImage(image_selector, page_selector, currentPage - offset);
 }
 
-function goNextPageFF(image_selector, page_selector, offset = 10) {
+function goNextPageFF(image_selector, page_selector, offset) {
 	console.log('goNextPageFF');
 	var currentPage = getCurrentPageNumber(page_selector);
 	changeImage(image_selector, page_selector, currentPage + offset);
@@ -224,13 +248,13 @@ function nextpageHandler(event) {
 function prevpageffHandler(event) {
 	console.log('prevpageffHandler');
 	event.preventDefault();
-	goPrevPageFF('#image', '#page_number');
+	goPrevPageFF('#image', '#page_number', page_offset);
 }
 
 function nextpageffHandler(event) {
 	console.log('nextpageffHandler');
 	event.preventDefault();
-	goNextPageFF('#image', '#page_number');
+	goNextPageFF('#image', '#page_number', page_offset);
 }
 
 function firstpageHandler(event) {
@@ -244,12 +268,4 @@ function lastpageHandler(event) {
 	event.preventDefault();
 
 	goLastPage('#image', '#page_number');
-}
-
-function togglemenuHandler(event) {
-	console.log('toggleMenuHandler');
-	event.preventDefault();
-
-	$("#header").toggle();
-	$("#footer").toggle();
 }
