@@ -44,8 +44,8 @@ class Book
 			throw new \Exception("zip open error:[".$this->archive_filename."]");
 		}
 
-		$apc_files = APCUtil::get('Zip::'.$this->archive_filename.'::files');
-		$apc_im_string_array = APCUtil::get('Zip::'.$this->archive_filename.'::im_string_array');
+		$apc_files = APCUtil::get(Book::class.'::'.$this->archive_filename.'::files');
+		$apc_im_string_array = APCUtil::get(Book::class.'::'.$this->archive_filename.'::im_string_array');
 
 		if ($apc_files === false || $apc_im_string_array === false){
 			$filearr = array();
@@ -61,8 +61,8 @@ class Book
 			}
 			sort($filearr);
 			$this->files = $filearr;
-			APCUtil::put('Zip::'.$this->archive_filename.'::files',serialize($this->files),APC_TTL);
-			APCUtil::put('Zip::'.$this->archive_filename.'::im_string_array',serialize($this->im_string_array),APC_TTL);
+			APCUtil::put(Book::class.'::'.$this->archive_filename.'::files',serialize($this->files),APC_TTL);
+			APCUtil::put(Book::class.'::'.$this->archive_filename.'::im_string_array',serialize($this->im_string_array),APC_TTL);
 		}else{
 			$this->files = unserialize($apc_files);
 			$this->im_string_array = unserialize($apc_im_string_arrays);
@@ -133,7 +133,7 @@ class Book
 			throw new \Exception("index error:[".$page."/".$this->max_page."]");
 		}
 
-		$filename = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::filename');
+		$filename = APCUtil::get(Book::class.'::'.$this->archive_filename.'::page'.$page.'::filename');
 		if ($filename === false){
 			$filename = $this->files[$page];
 			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::filename',$filename,APC_TTL);
@@ -142,10 +142,10 @@ class Book
 	}
 	public function getIMString($page){
 		$filename = $this->getFilename($page);
-		$im_string = APCUtil::get('Zip::'.$this->archive_filename.'::page'.$page.'::im_string');
+		$im_string = APCUtil::get(Book::class.'::'.$this->archive_filename.'::page'.$page.'::im_string');
 		if ($im_string === false){
 			$im_string = $this->im_string_array[$filename];
-			APCUtil::put('Zip::'.$this->archive_filename.'::page'.$page.'::im_string',$im_string,APC_TTL);
+			APCUtil::put(Book::class.'::'.$this->archive_filename.'::page'.$page.'::im_string',$im_string,APC_TTL);
 		}
 		return $im_string;
 	}
